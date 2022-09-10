@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { GetConstellationData } from "./config/api/user";
-GetConstellationData();
+  import { GetLogin } from './config/api/user'
+  GetLogin({ name: 'coderwhy', password: '123456' })
 </script>
 
 <style scoped></style>

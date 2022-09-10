@@ -1,30 +1,51 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { Message } from '@arco-design/web-vue';
+import { Message } from "@arco-design/web-vue";
 
-export const instance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_URL as string,
-  // baseURL: 'http://192.168.31.31',
-  timeout: 10000,
-});
+type Params = {
+  url: string;
+  method: string;
+  params?: { [key: string]: any };
+  data?: { [key: string]: any };
+};
 
 // 请求失败函数
-const errorHandler = (err: any) =>  Promise.reject(err);
+const errorHandler = (err: any) => Promise.reject(err);
 
 // 相应失败函数
 const resErrorHandler = (err: any) => {
-  Message.error('网络超时或连接超时，请稍后再试')
+  Message.error("网络超时或连接超时，请稍后再试");
   errorHandler(err);
-}
+};
 
-// 添加请求拦截器
-instance.interceptors.request.use((config: AxiosRequestConfig) => {
-  console.log(config);
-  return config;
-}, errorHandler);
+export default <T = any>(params: Params, auth = false): Promise<T> => {
+  // 创建 axios 实例
+  const instance: AxiosInstance = axios.create({
+    // API 请求的默认前缀
+    baseURL: import.meta.env.VITE_APP_URL as string,
+    timeout: 6000, // 请求超时时间
+    withCredentials: true, // 携带cookie
+  });
 
-// 添加响应拦截器
-instance.interceptors.response.use((response: AxiosResponse) => {
-  console.log(response)
-  console.log(response);
-  return response.data;
-}, resErrorHandler);
+  // 异常拦截处理器
+  const errorHandler = (error: any) => Promise.reject(error);
+
+  // 响应异常拦截处理器
+  const resErrorHandler = (error: any) => {
+    Message.error(`网络超时，请稍后重试`);
+    return errorHandler(error);
+  };
+
+  // request interceptor
+  instance.interceptors.request.use((config: AxiosRequestConfig) => {
+    console.log(config)
+    return config;
+  }, errorHandler);
+
+  // response interceptor
+  instance.interceptors.response.use(async (response: AxiosResponse) => {
+    console.log(response)
+    return response
+  }, resErrorHandler);
+
+  return instance(params);
+};

@@ -1,9 +1,9 @@
-import { instance as request } from '../request';
+import request from '../request';
 
-export const GetConstellationData = () => {
-  console.log(1111);
+export const GetLogin = (params: any) => {
   return request({
-    url: '/mock/goods',
-    method: 'get',
+    url: '/login',
+    method: 'post',
+    data: params
   })
 }

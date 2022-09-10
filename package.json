@@ -4,14 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "preview:dev": "cross-env NODE_ENV=development vite --mode development",
+    "preview:dev": "vite --mode development",
     "preview:prd": "vite --mode production",
     "build": "vue-tsc --noEmit && vite build --mode development",
     "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "mockjs": "^1.1.0",
     "pinia": "^2.0.22",
     "vue": "^3.2.37"
   },
