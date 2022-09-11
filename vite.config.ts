@@ -10,7 +10,7 @@ export default defineConfig({
     port: 8080,
     proxy: {
       "/api": {
-        target: "http://152.136.185.210:5000",
+        target: "http://gateway.wubangtu.xyz:9999",
         changeOrigin: true,
         rewrite: (path) => path.replace(/\/api/, ""),
       },

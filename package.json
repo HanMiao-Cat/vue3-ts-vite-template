@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "echarts": "^5.3.3",
     "pinia": "^2.0.22",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.36.0",

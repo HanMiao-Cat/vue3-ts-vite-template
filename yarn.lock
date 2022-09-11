@@ -200,7 +200,7 @@
     "@vue/compiler-dom" "3.2.38"
     "@vue/shared" "3.2.38"
 
-"@vue/devtools-api@^6.2.1":
+"@vue/devtools-api@^6.1.4", "@vue/devtools-api@^6.2.1":
   version "6.2.1"
   resolved "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.2.1.tgz"
   integrity sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==
@@ -395,11 +395,6 @@ combined-stream@^1.0.8:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@*:
-  version "9.4.0"
-  resolved "https://registry.npmmirror.com/commander/-/commander-9.4.0.tgz"
-  integrity sha512-sRPT+umqkz90UA8M1yqYfnHlZA7fF6nSphDtxeywPZ49ysjxDQybzk13CL+mXekDRG92skbcqCLVovuCusNmFw==
-
 compute-scroll-into-view@^1.0.17:
   version "1.0.17"
   resolved "https://registry.npmjs.org/compute-scroll-into-view/-/compute-scroll-into-view-1.0.17.tgz"
@@ -464,6 +459,14 @@ delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/delayed-stream/-/delayed-stream-1.0.0.tgz"
   integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
+
+echarts@^5.3.3:
+  version "5.3.3"
+  resolved "https://registry.npmmirror.com/echarts/-/echarts-5.3.3.tgz#df97b09c4c0e2ffcdfb44acf518d50c50e0b838e"
+  integrity sha512-BRw2serInRwO5SIwRviZ6Xgm5Lb7irgz+sLiFMmy/HOaf4SQ+7oYqxKzRHAKp4xHQ05AuHw1xvoQWJjDQq/FGw==
+  dependencies:
+    tslib "2.3.0"
+    zrender "5.3.2"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -834,13 +837,6 @@ mlly@^0.5.14, mlly@^0.5.7:
     pkg-types "^0.3.4"
     ufo "^0.8.5"
 
-mockjs@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/mockjs/-/mockjs-1.1.0.tgz"
-  integrity sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ==
-  dependencies:
-    commander "*"
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmmirror.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -1063,6 +1059,11 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
+tslib@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 typescript@^4.6.4:
   version "4.8.2"
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.8.2.tgz"
@@ -1169,6 +1170,13 @@ vue-demi@*:
   resolved "https://registry.npmjs.org/vue-demi/-/vue-demi-0.13.11.tgz"
   integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
 
+vue-router@4:
+  version "4.1.5"
+  resolved "https://registry.npmmirror.com/vue-router/-/vue-router-4.1.5.tgz#256f597e3f5a281a23352a6193aa6e342c8d9f9a"
+  integrity sha512-IsvoF5D2GQ/EGTs/Th4NQms9gd2NSqV+yylxIyp/OYp8xOwxmU8Kj/74E9DTSYAyH5LX7idVUngN3JSj1X4xcQ==
+  dependencies:
+    "@vue/devtools-api" "^6.1.4"
+
 vue-tsc@^0.40.4:
   version "0.40.10"
   resolved "https://registry.npmjs.org/vue-tsc/-/vue-tsc-0.40.10.tgz"
@@ -1209,3 +1217,10 @@ yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/yallist/-/yallist-4.0.0.tgz"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
+
+zrender@5.3.2:
+  version "5.3.2"
+  resolved "https://registry.npmmirror.com/zrender/-/zrender-5.3.2.tgz#f67b11d36d3d020d62411d3bb123eb1c93cccd69"
+  integrity sha512-8IiYdfwHj2rx0UeIGZGGU4WEVSDEdeVCaIg/fomejg1Xu6OifAL1GVzIPHg2D+MyUkbNgPWji90t0a8IDk+39w==
+  dependencies:
+    tslib "2.3.0"

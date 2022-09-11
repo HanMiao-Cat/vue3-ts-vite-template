@@ -36,15 +36,22 @@ export default <T = any>(params: Params, auth = false): Promise<T> => {
   };
 
   // request interceptor
-  instance.interceptors.request.use((config: AxiosRequestConfig) => {
-    console.log(config)
+  instance.interceptors.request.use((config: any) => {
+    if(auth) {
+      config.headers.Authorization = 'Bearer 12bea3a3-4843-4ef1-b241-920fda1cd9ea'
+    }
     return config;
   }, errorHandler);
 
   // response interceptor
   instance.interceptors.response.use(async (response: AxiosResponse) => {
-    console.log(response)
-    return response
+    // console.log(response)
+    if(response.status === 200) {
+      let data = response.data;
+      if(data.code === 0) {
+        return data.data
+      }
+    }
   }, resErrorHandler);
 
   return instance(params);

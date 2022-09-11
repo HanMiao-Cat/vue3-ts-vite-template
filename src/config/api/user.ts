@@ -1,9 +1,8 @@
 import request from '../request';
 
-export const GetLogin = (params: any) => {
+export const GetLogin = () => {
   return request({
-    url: '/login',
-    method: 'post',
-    data: params
-  })
+    url: '/exam/exam/info/page',
+    method: 'get',
+  }, true)
 }
