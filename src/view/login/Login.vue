@@ -3,46 +3,81 @@
     <div class="login-wrap-form">
       <div class="login-wrap-title">
         <h1 class="login-wrap-title-greet">欢迎登录</h1>
-        <p class="login-wrap-title-name">...平台</p>
       </div>
-      <a-form :model="form" @submit="handleSubmit">
+      <a-form
+        :model="form"
+        ref="formRef"
+        @submit-success="handleSubmit"
+        label-align="left"
+        auto-label-width
+        :rules="rules"
+      >
         <a-form-item field="name" label="用户名">
-          <a-input
-            v-model="form.name"
-            size="large"
-          >
+          <a-input v-model="form.name" size="large">
             <template #prefix>
               <icon-user />
             </template>
           </a-input>
         </a-form-item>
-        <a-form-item field="post" label="密码">
-          <a-input
-            v-model="form.post"
-            size="large"
-          >
-          <template #prefix>
-            <icon-lock/>
-          </template>
-        </a-input>
+        <a-form-item field="passWord" label="密码">
+          <a-input v-model="form.passWord" size="large">
+            <template #prefix>
+              <icon-lock />
+            </template>
+          </a-input>
         </a-form-item>
-        <a-form-item>
-          <a-button html-type="submit" class="login-wrap-submit">登录</a-button>
-        </a-form-item>
+        <a-button
+          html-type="submit"
+          class="login-wrap-submit"
+          :type="buttonDisable == false ? 'primary' : undefined"
+          :disabled="buttonDisable"
+          >登录</a-button
+        >
       </a-form>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import { IconUser, IconLock } from "@arco-design/web-vue/es/icon";
-const form = reactive({
+import md5 from "js-md5";
+import storage from "store";
+// import { useUserStore } from "../../store/user";
+
+type IFormType = {
+  name: string;
+  passWord: string;
+};
+
+const form = reactive<IFormType>({
   name: "",
-  post: "",
+  passWord: "",
 });
+
+const rules = {
+  name: [
+    { required: true, message: '请输入用户名', trigger: 'blur' }
+  ],
+  passWord: [
+    { required: true, message: '请输入密码', trigger: 'blur' }
+  ]
+}
+
+const buttonDisable = computed(() => {
+  let flag = false;
+  let key: keyof IFormType;
+  for (key in form) {
+    if (!form[key]) {
+      flag = true;
+    }
+  }
+  return flag;
+});
+
 const handleSubmit = () => {
-  console.log(111);
+  const token = 123212313213
+  // storage.set('token', token)
 };
 </script>
 
@@ -53,22 +88,25 @@ const handleSubmit = () => {
   position: relative;
   .login-wrap-form {
     width: 400px;
-    height: 500px;
+    height: 400px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     right: 20%;
     top: 50%;
     transform: translateY(-50%);
     position: absolute;
-    padding: 30px;
+    padding: 36px;
     box-sizing: border-box;
-    .login-wrap-title{
+    .login-wrap-title {
       display: flex;
-      margin-bottom: 100px;
+      margin-bottom: 50px;
       align-items: center;
+      justify-content: center;
+      color: rgb(var(--arcoblue-6));
     }
-    .login-wrap-submit{
+    .login-wrap-submit {
       width: 100%;
       height: 36px;
+      margin-top: 20px;
     }
   }
 }
