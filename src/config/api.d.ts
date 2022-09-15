@@ -1,6 +1,7 @@
 declare namespace Params {
-  interface userInfo {
-    name: string
+  interface Login {
+    name: string,
+    passWord: string
   }
 }
 

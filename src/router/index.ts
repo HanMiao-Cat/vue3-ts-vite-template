@@ -4,7 +4,7 @@ import permission from "./permission"
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/login"
+    redirect: "/home"
   },
   {
     path: "/login",
@@ -12,22 +12,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../view/login/Login.vue"),
   },
   {
-    path: "/",
+    path: "/layouts",
     name: "Layouts",
     component: () => import("../components/layouts/Layouts.vue"),
-    redirect: "/home",
-    children: [
-      {
-        path: "/home",
-        name: "Home",
-        component: () => import("../view/home/Home.vue"),
-      },
-      {
-        path: "/goods",
-        name: "Goods",
-        component: () => import("../view/goods/Goods.vue"),
-      },
-    ],
   },
   {
     path: "/:pathMatch(.*)*",

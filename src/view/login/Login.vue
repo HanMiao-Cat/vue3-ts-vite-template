@@ -20,11 +20,11 @@
           </a-input>
         </a-form-item>
         <a-form-item field="passWord" label="密码">
-          <a-input v-model="form.passWord" size="large">
+          <a-input-password autocomplete v-model="form.passWord" size="large">
             <template #prefix>
               <icon-lock />
             </template>
-          </a-input>
+          </a-input-password>
         </a-form-item>
         <a-button
           html-type="submit"
@@ -41,18 +41,13 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
 import { IconUser, IconLock } from "@arco-design/web-vue/es/icon";
-import md5 from "js-md5";
-import storage from "store";
-// import { useUserStore } from "../../store/user";
+import { useUserStore } from "../../store/user";
 
-type IFormType = {
-  name: string;
-  passWord: string;
-};
+const userStore = useUserStore();
 
-const form = reactive<IFormType>({
-  name: "",
-  passWord: "",
+const form = reactive<Params.Login>({
+  name: "admin",
+  passWord: "123456",
 });
 
 const rules = {
@@ -66,7 +61,7 @@ const rules = {
 
 const buttonDisable = computed(() => {
   let flag = false;
-  let key: keyof IFormType;
+  let key: keyof Params.Login;
   for (key in form) {
     if (!form[key]) {
       flag = true;
@@ -76,8 +71,7 @@ const buttonDisable = computed(() => {
 });
 
 const handleSubmit = () => {
-  const token = 123212313213
-  // storage.set('token', token)
+  userStore._GetLogin(form)
 };
 </script>
 
