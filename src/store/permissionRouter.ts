@@ -1,27 +1,26 @@
 import { defineStore } from "pinia";
-import Layouts from "../components/layouts/Layouts.vue";
-import router from "../router/index";
+const routeAllPathToCompMap = import.meta.glob(`../view/**/*.vue`);
 
 export const usePermissionRouter = defineStore("permissionRouter", {
   state: () => ({
     arr: [] as any
   }),
   actions: {
-    
-    _GenerateRoutes(menus: any[]) {
+    _GenerateRoutes<T>(menus: T[]): T[] {
       menus.forEach((item: any) => {
         const route = {
           path: `${item.path}`,
           name: item.name,
-          component: () => import(`/src${item.component}`),
+          component:  routeAllPathToCompMap[/* @vite-ignore */ `../view/${item.component}`]
         };
-        console.log(route);
+      
         if(item.children && item.children.length) {
           this._GenerateRoutes(item.children);
         }
 
         this.arr.push(route);
       });
+      console.log(this.arr);
       return this.arr;
     },
   },

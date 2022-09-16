@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import permission from "./permission"
+import permission from "./permission";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/home"
+    name:'app',
+    redirect: "/layouts",
   },
   {
     path: "/login",
@@ -14,13 +15,26 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/layouts",
     name: "Layouts",
+    redirect: "/home",
+    children: [
+      // {
+      //   path: "/home",
+      //   name: "home",
+      //   component: () => import("../view/home/Home.vue"),
+      // },
+      // {
+      //   path: "/goods",
+      //   name: "goods",
+      //   component: () => import("../view/goods/Goods.vue"),
+      // },
+    ],
     component: () => import("../components/layouts/Layouts.vue"),
   },
-  {
-    path: "/:pathMatch(.*)*",
-    name: "NotFound",
-    component: () => import("../view/notFound/NotFound.vue"),
-  },
+  // {
+  //   path: "/:pathMatch(.*)*",
+  //   name: "NotFound",
+  //   component: () => import("../view/notFound/NotFound.vue"),
+  // },
 ];
 
 const router = createRouter({
@@ -28,6 +42,6 @@ const router = createRouter({
   routes,
 });
 
-permission(router)
+permission(router);
 
 export default router;

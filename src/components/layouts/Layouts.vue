@@ -1,6 +1,6 @@
 <template>
   <div class="home-left-menus">
-    
+    adasd
     <router-view/>
   </div>
 </template>

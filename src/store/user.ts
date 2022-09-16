@@ -4,6 +4,7 @@ import storage from "store";
 import { Message } from "@arco-design/web-vue";
 import { usePermissionRouter } from "../store/permissionRouter";
 import router from "../router";
+import { toRaw } from "vue";
 
 type Imeus = {
   component: string;
@@ -17,6 +18,7 @@ export const useUserStore = defineStore("userStore", {
     token: "",
     name: "",
     menus: [] as Imeus[],
+    loadRouter: false,
   }),
   getters: {
     getToken: (state) => {
@@ -37,34 +39,41 @@ export const useUserStore = defineStore("userStore", {
     },
 
     _GetMenus() {
-      return new Promise((reslove, reject) => {
-        const menus = [
+      return new Promise(async (reslove, reject) => {
+        const menus: Array<Imeus> = [
           {
             path: "/home",
             name: "Home",
-            component: "/view/home/Home.vue",
-            children: [
-              {
-                path: "/sss",
-                name: "Sdskjhd",
-                component: "/view/home/Home.vue",
-              },
-            ],
+            component: "home/Home.vue",
+            // children: [
+            //   {
+            //     path: "/goodsitem",
+            //     name: "GoodsItem",
+            //     component: "/home/Home.vue",
+            //   },
+            // ],
           },
           {
             path: "/goods",
             name: "Goods",
-            component: "/view/goods/Goods.vue",
+            component: "goods/Goods.vue",
           },
         ];
         this.menus = menus;
         const permissionRouter = usePermissionRouter();
-        const results = permissionRouter._GenerateRoutes(menus);
+        const results = await permissionRouter._GenerateRoutes<Imeus>(menus);
         results.forEach((item: any) => {
-          console.log(item);
-          router.addRoute("Layouts", item);
+          const _item = toRaw(item);
+          router.addRoute("Layouts", _item);
         });
-        console.log(router.getRoutes(), "查看现有路由");
+
+        router.addRoute({
+          path: "/:pathMatch(.*)*",
+          name: "NotFound",
+          component: () => import("../view/notFound/NotFound.vue"),
+        });
+
+        this.loadRouter = true;
         reslove(menus);
       });
     },
