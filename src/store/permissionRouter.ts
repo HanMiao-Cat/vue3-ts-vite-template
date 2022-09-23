@@ -17,7 +17,6 @@ export const usePermissionRouter = defineStore("permissionRouter", {
         if(item.children && item.children.length) {
           this._GenerateRoutes(item.children);
         }
-
         this.arr.push(route);
       });
       console.log(this.arr);

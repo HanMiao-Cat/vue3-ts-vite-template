@@ -13,7 +13,11 @@ declare module '@vue/runtime-core' {
     AFormItem: typeof import('@arco-design/web-vue')['FormItem']
     AInput: typeof import('@arco-design/web-vue')['Input']
     AInputPassword: typeof import('@arco-design/web-vue')['InputPassword']
+    AMenu: typeof import('@arco-design/web-vue')['Menu']
+    AMenuItem: typeof import('@arco-design/web-vue')['MenuItem']
+    ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
     Layouts: typeof import('./src/components/layouts/Layouts.vue')['default']
+    LeftMenus: typeof import('./src/components/layouts/components/leftMenus/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

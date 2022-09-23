@@ -41,9 +41,12 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
 import { IconUser, IconLock } from "@arco-design/web-vue/es/icon";
+import { Notification } from '@arco-design/web-vue';
 import { useUserStore } from "../../store/user";
+import { useRouter } from "vue-router";
 
 const userStore = useUserStore();
+const router = useRouter();
 
 const form = reactive<Params.Login>({
   name: "admin",
@@ -70,8 +73,10 @@ const buttonDisable = computed(() => {
   return flag;
 });
 
-const handleSubmit = () => {
-  userStore._GetLogin(form)
+const handleSubmit = async () => {
+  await userStore._GetLogin(form);
+  router.push('/home');
+  Notification.success({content: `欢迎回来,${form.name}`});
 };
 </script>
 

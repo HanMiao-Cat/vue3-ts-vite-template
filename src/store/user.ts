@@ -10,6 +10,7 @@ type Imeus = {
   component: string;
   name: string;
   path?: string;
+  redirect?: string,
   children?: Imeus[];
 };
 
@@ -27,15 +28,19 @@ export const useUserStore = defineStore("userStore", {
   },
   actions: {
     async _GetLogin(params: Params.Login) {
-      if (params.name === "admin" && params.passWord === "123456") {
-        setTimeout(() => {
-          const token = "1231323132";
-          this.token = md5(token);
-          storage.set("token", this.token);
-        }, 1000);
-      } else {
-        Message.error(`账号或密码错误`);
-      }
+      return new Promise((reslove, reject) => {
+        if (params.name === "admin" && params.passWord === "123456") {
+          setTimeout(() => {
+            const token = "1231323132";
+            this.token = md5(token);
+            storage.set("token", this.token);
+            reslove('yes');
+          }, 1000);
+        } else {
+          Message.error(`账号或密码错误`);
+          reject();
+        }
+      })
     },
 
     _GetMenus() {
@@ -45,18 +50,16 @@ export const useUserStore = defineStore("userStore", {
             path: "/home",
             name: "Home",
             component: "home/Home.vue",
-            // children: [
-            //   {
-            //     path: "/goodsitem",
-            //     name: "GoodsItem",
-            //     component: "/home/Home.vue",
-            //   },
-            // ],
           },
           {
-            path: "/goods",
-            name: "Goods",
-            component: "goods/Goods.vue",
+            name: "Order",
+            component: "order/Order.vue",
+            redirect: "/goods",
+            children: [{
+              path: "/goods",
+              name: "Goods",
+              component: "goods/Goods.vue",
+            }],
           },
         ];
         this.menus = menus;
