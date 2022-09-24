@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
     Layouts: typeof import('./src/components/layouts/Layouts.vue')['default']
     LeftMenus: typeof import('./src/components/layouts/components/leftMenus/index.vue')['default']
+    NavMenus: typeof import('./src/components/layouts/components/navMenus/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

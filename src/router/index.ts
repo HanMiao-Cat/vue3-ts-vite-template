@@ -15,26 +15,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/layouts",
     name: "Layouts",
-    redirect: "/home",
-    children: [
-      // {
-      //   path: "/home",
-      //   name: "home",
-      //   component: () => import("../view/home/Home.vue"),
-      // },
-      // {
-      //   path: "/goods",
-      //   name: "goods",
-      //   component: () => import("../view/goods/Goods.vue"),
-      // },
-    ],
     component: () => import("../components/layouts/Layouts.vue"),
   },
-  // {
-  //   path: "/:pathMatch(.*)*",
-  //   name: "NotFound",
-  //   component: () => import("../view/notFound/NotFound.vue"),
-  // },
 ];
 
 const router = createRouter({

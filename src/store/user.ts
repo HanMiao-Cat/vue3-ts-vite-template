@@ -47,13 +47,21 @@ export const useUserStore = defineStore("userStore", {
       return new Promise(async (reslove, reject) => {
         const menus: Array<Imeus> = [
           {
-            path: "/home",
-            name: "Home",
-            component: "home/Home.vue",
+            path: "/system",
+            name: "System",
+            component: "Layouts",
+            redirect: "/home",
+            children: [
+              {
+                path: "/home",
+                name: "Home",
+                component: "home/Home.vue"
+              }
+            ] 
           },
           {
             name: "Order",
-            component: "order/Order.vue",
+            component: "Layouts",
             redirect: "/goods",
             children: [{
               path: "/goods",
@@ -65,6 +73,7 @@ export const useUserStore = defineStore("userStore", {
         this.menus = menus;
         const permissionRouter = usePermissionRouter();
         const results = await permissionRouter._GenerateRoutes<Imeus>(menus);
+        console.log(results);
         results.forEach((item: any) => {
           const _item = toRaw(item);
           router.addRoute("Layouts", _item);
