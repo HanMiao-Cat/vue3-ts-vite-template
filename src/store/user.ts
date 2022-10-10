@@ -9,7 +9,9 @@ import { toRaw } from "vue";
 type Imeus = {
   component: string;
   name: string;
-  path?: string;
+  path: string;
+  key: string,
+  icon?: string,
   redirect?: string,
   children?: Imeus[];
 };
@@ -51,21 +53,28 @@ export const useUserStore = defineStore("userStore", {
             name: "System",
             component: "Layouts",
             redirect: "/home",
+            icon: "icon-home",
+            key: "1",
             children: [
               {
                 path: "/home",
                 name: "Home",
+                key: '1-1',
                 component: "home/Home.vue"
               }
             ] 
           },
           {
+            path: "/order",
             name: "Order",
             component: "Layouts",
+            icon: "icon-common",
             redirect: "/goods",
+            key: '2',
             children: [{
               path: "/goods",
               name: "Goods",
+              key: '2-1',
               component: "goods/Goods.vue",
             }],
           },

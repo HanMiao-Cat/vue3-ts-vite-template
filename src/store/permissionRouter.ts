@@ -8,7 +8,6 @@ export const usePermissionRouter = defineStore("permissionRouter", {
   }),
   actions: {
     _GenerateRoutes<T>(menus: T[]): T[] {
-      console.log(menus);
       interface IrouterItem {
         path: string,
         name: string,
@@ -21,7 +20,7 @@ export const usePermissionRouter = defineStore("permissionRouter", {
           name: item.name,
         }
         if(item.component === 'Layouts') {
-          route.component = () => import(`../components/layouts/Layouts.vue`);
+          route.component = routeAllPathToCompMap[/* @vite-ignore */ `../components/layouts/Layouts.vue`];
         }else{
           route.component = routeAllPathToCompMap[/* @vite-ignore */ `../view/${item.component}`];
         }
@@ -31,6 +30,7 @@ export const usePermissionRouter = defineStore("permissionRouter", {
         }
         this.arr.push(route);
       });
+      console.log(this.arr)
       return this.arr;
     },
   },

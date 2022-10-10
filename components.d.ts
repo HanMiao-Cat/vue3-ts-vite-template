@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     AInputPassword: typeof import('@arco-design/web-vue')['InputPassword']
     AMenu: typeof import('@arco-design/web-vue')['Menu']
     AMenuItem: typeof import('@arco-design/web-vue')['MenuItem']
+    APopover: typeof import('@arco-design/web-vue')['Popover']
     ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
     Layouts: typeof import('./src/components/layouts/Layouts.vue')['default']
     LeftMenus: typeof import('./src/components/layouts/components/leftMenus/index.vue')['default']
