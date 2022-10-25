@@ -1,43 +1,38 @@
-import { defineStore } from "pinia";
+import {defineStore} from "pinia";
 import md5 from "js-md5";
 import storage from "store";
-import { Message } from "@arco-design/web-vue";
-import { usePermissionRouter } from "../store/permissionRouter";
+import {Message} from "@arco-design/web-vue";
+import {usePermissionRouter} from "./permissionRouter";
 import router from "../router";
-import { toRaw } from "vue";
+import {toRaw} from "vue";
 
-type Imeus = {
+export type Imeus = {
   component: string;
   name: string;
   path: string;
   key: string,
-  icon?: string,
+  icon?: any,
   redirect?: string,
   children?: Imeus[];
 };
 
 export const useUserStore = defineStore("userStore", {
   state: () => ({
-    token: "",
-    name: "",
+    name: '',
     menus: [] as Imeus[],
     loadRouter: false,
+    menusItem: {} as Imeus,
   }),
-  getters: {
-    getToken: (state) => {
-      return state.token;
-    },
-  },
   actions: {
+    // 登录
     async _GetLogin(params: Params.Login) {
       return new Promise((reslove, reject) => {
         if (params.name === "admin" && params.passWord === "123456") {
-          setTimeout(() => {
-            const token = "1231323132";
-            this.token = md5(token);
-            storage.set("token", this.token);
-            reslove('yes');
-          }, 1000);
+          let token = "1231323132";
+          token = md5(token);
+          storage.set("token", token);
+          this.name = params.name;
+          reslove('yes');
         } else {
           Message.error(`账号或密码错误`);
           reject();
@@ -45,15 +40,21 @@ export const useUserStore = defineStore("userStore", {
       })
     },
 
+    // 获取用户信息接口
+    _getUserInfo() {
+      this.name = 'admin';
+    },
+
+    // 获取路由信息
     _GetMenus() {
-      return new Promise(async (reslove, reject) => {
+      return new Promise((reslove) => {
         const menus: Array<Imeus> = [
           {
             path: "/system",
-            name: "System",
+            name: "Systems",
             component: "Layouts",
             redirect: "/home",
-            icon: "icon-home",
+            icon: "IconApps",
             key: "1",
             children: [
               {
@@ -61,14 +62,19 @@ export const useUserStore = defineStore("userStore", {
                 name: "Home",
                 key: '1-1',
                 component: "home/Home.vue"
+              },{
+                path: "/router",
+                name: "Router",
+                key: '1-2',
+                component: "router/Router.vue"
               }
-            ] 
+            ]
           },
           {
             path: "/order",
             name: "Order",
             component: "Layouts",
-            icon: "icon-common",
+            icon: "IconRobot",
             redirect: "/goods",
             key: '2',
             children: [{
@@ -81,13 +87,13 @@ export const useUserStore = defineStore("userStore", {
         ];
         this.menus = menus;
         const permissionRouter = usePermissionRouter();
-        const results = await permissionRouter._GenerateRoutes<Imeus>(menus);
-        console.log(results);
+        const results = permissionRouter._GenerateRoutes<Imeus>(menus);
         results.forEach((item: any) => {
           const _item = toRaw(item);
           router.addRoute("Layouts", _item);
         });
 
+        // 添加错误路由
         router.addRoute({
           path: "/:pathMatch(.*)*",
           name: "NotFound",
@@ -98,5 +104,11 @@ export const useUserStore = defineStore("userStore", {
         reslove(menus);
       });
     },
+
+    // 退出
+    _GetLogout() {
+      storage.remove('token');
+      this.name = '';
+    }
   },
 });

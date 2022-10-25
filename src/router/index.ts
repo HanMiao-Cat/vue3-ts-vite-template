@@ -1,11 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 import permission from "./permission";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name:'app',
-    redirect: "/layouts",
+    redirect: "/home",
   },
   {
     path: "/login",

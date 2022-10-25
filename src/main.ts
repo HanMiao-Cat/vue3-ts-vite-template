@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { store } from "./store/index"
+import { store } from "./store"
 import router from "./router/index"
 import "./echarts/index"
 import "@arco-design/web-vue/es/message/style/css.js"

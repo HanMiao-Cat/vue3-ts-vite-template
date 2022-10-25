@@ -1,13 +1,12 @@
 import type { Router } from "vue-router";
 import storage from "store";
-import NProgress from "nprogress";
+import NProgress from "../extends/index";
 import { useUserStore } from "../store/user";
 const whiteList = ["Login"];
 const defaultPath = "/home";
 
 const permission = (router: Router) => {
-  router.beforeEach((to, from, next) => {
-    console.log(to);
+  router.beforeEach( async (to, from, next) => {
     NProgress.start();
     const token = storage.get("token");
     const isWhite = whiteList.includes(to.name as string);
@@ -16,10 +15,12 @@ const permission = (router: Router) => {
         next({ path: defaultPath });
       } else {
         const userStore = useUserStore();
+        // 判断是否添加好路由
         if (userStore.loadRouter) {
           next();
         } else {
-          userStore._GetMenus();
+          await userStore._getUserInfo();
+          await userStore._GetMenus();
           next({ ...to, replace: true });
         }
       }
@@ -29,6 +30,7 @@ const permission = (router: Router) => {
       } else {
         next({ path: "/login" });
       }
+      NProgress.done();
     }
   });
 

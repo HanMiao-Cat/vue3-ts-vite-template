@@ -29,7 +29,7 @@
         <a-button
           html-type="submit"
           class="login-wrap-submit"
-          :type="buttonDisable == false ? 'primary' : undefined"
+          :type="buttonDisable === false ? 'primary' : undefined"
           :disabled="buttonDisable"
           >登录</a-button
         >
@@ -75,8 +75,10 @@ const buttonDisable = computed(() => {
 
 const handleSubmit = async () => {
   await userStore._GetLogin(form);
-  router.push('/home');
-  Notification.success({content: `欢迎回来,${form.name}`});
+  Notification.success({title:`登录成功`, content: `欢迎回来！${form.name}`});
+  setTimeout(() => {
+    router.push('/home');
+  }, 800)
 };
 </script>
 

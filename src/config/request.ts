@@ -45,7 +45,6 @@ export default <T = any>(params: Params, auth = false): Promise<T> => {
 
   // response interceptor
   instance.interceptors.response.use(async (response: AxiosResponse) => {
-    // console.log(response)
     if(response.status === 200) {
       let data = response.data;
       if(data.code === 0) {
@@ -54,5 +53,5 @@ export default <T = any>(params: Params, auth = false): Promise<T> => {
     }
   }, resErrorHandler);
 
-  return instance(params);
+  return instance(params) as Promise<T>;
 };

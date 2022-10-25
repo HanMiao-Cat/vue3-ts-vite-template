@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 const routeAllPathToCompMap = import.meta.glob(`../view/**/*.vue`);
 import { Component } from 'vue';
+import Layout from "../components/layouts/Layouts.vue";
 
 export const usePermissionRouter = defineStore("permissionRouter", {
   state: () => ({
@@ -20,17 +21,16 @@ export const usePermissionRouter = defineStore("permissionRouter", {
           name: item.name,
         }
         if(item.component === 'Layouts') {
-          route.component = routeAllPathToCompMap[/* @vite-ignore */ `../components/layouts/Layouts.vue`];
+          route.component = Layout
         }else{
           route.component = routeAllPathToCompMap[/* @vite-ignore */ `../view/${item.component}`];
         }
-      
+
         if(item.children && item.children.length) {
           this._GenerateRoutes(item.children);
         }
         this.arr.push(route);
       });
-      console.log(this.arr)
       return this.arr;
     },
   },
