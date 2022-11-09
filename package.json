@@ -7,10 +7,15 @@
     "preview:dev": "vite --mode development",
     "preview:prd": "vite --mode production",
     "build": "vue-tsc --noEmit && vite build --mode development",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "commit": "cz"
   },
   "dependencies": {
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0",
+    "@commitlint/cz-commitlint": "^17.2.0",
     "axios": "^0.27.2",
+    "commitizen": "^4.2.5",
     "echarts": "^5.3.3",
     "js-md5": "^0.7.3",
     "nprogress": "^0.2.0",
