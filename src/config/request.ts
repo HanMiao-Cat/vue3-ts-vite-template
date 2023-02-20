@@ -4,8 +4,8 @@ import { Message } from "@arco-design/web-vue";
 type Params = {
   url: string;
   method: string;
-  params?: { [key: string]: any };
-  data?: { [key: string]: any };
+  params?: Record<string, any>;
+  data?: Record<string, any>;
 };
 
 // 请求失败函数
