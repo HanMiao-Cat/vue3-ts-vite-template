@@ -2,14 +2,12 @@ import type { Router } from "vue-router";
 import storage from "store";
 import NProgress from "../extends/index";
 import { useUserStore } from "../store/user";
-const whiteList = ["Login"];
 const defaultPath = "/home";
 
 const permission = (router: Router) => {
-  router.beforeEach( async (to, from, next) => {
+  router.beforeEach(async (to, from, next) => {
     NProgress.start();
     const token = storage.get("token");
-    const isWhite = whiteList.includes(to.name as string);
     if (token) {
       if (to.path === "/login") {
         next({ path: defaultPath });
@@ -25,10 +23,8 @@ const permission = (router: Router) => {
         }
       }
     } else {
-      if (isWhite) {
+      if (to.path === "/login") {
         next();
-      } else {
-        next({ path: "/login" });
       }
       NProgress.done();
     }
