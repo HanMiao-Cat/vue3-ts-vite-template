@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { Message } from "@arco-design/web-vue";
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { Message } from '@arco-design/web-vue';
 
 type Params = {
   url: string;
@@ -8,22 +8,10 @@ type Params = {
   data?: Record<string, any>;
 };
 
-// 请求失败函数
-const errorHandler = (err: any) => Promise.reject(err);
-
-// 相应失败函数
-const resErrorHandler = (err: any) => {
-  Message.error("网络超时或连接超时，请稍后再试");
-  errorHandler(err);
-};
-
 export default <T = any>(params: Params, auth = false): Promise<T> => {
-  // 创建 axios 实例
   const instance: AxiosInstance = axios.create({
-    // API 请求的默认前缀
-    baseURL: import.meta.env.VITE_APP_URL as string,
-    timeout: 6000, // 请求超时时间
-    withCredentials: true, // 携带cookie
+    baseURL: import.meta.env.VITE_APP_URL,
+    timeout: 6000,
   });
 
   // 异常拦截处理器
@@ -37,18 +25,19 @@ export default <T = any>(params: Params, auth = false): Promise<T> => {
 
   // request interceptor
   instance.interceptors.request.use((config: any) => {
-    if(auth) {
-      config.headers.Authorization = 'Bearer 12bea3a3-4843-4ef1-b241-920fda1cd9ea'
+    if (auth) {
+      config.headers.Authorization =
+        'Bearer 12bea3a3-4843-4ef1-b241-920fda1cd9ea';
     }
     return config;
   }, errorHandler);
 
   // response interceptor
   instance.interceptors.response.use(async (response: AxiosResponse) => {
-    if(response.status === 200) {
-      let data = response.data;
-      if(data.code === 0) {
-        return data.data
+    if (response.status === 200) {
+      const data = response.data;
+      if (data.code === 0) {
+        return data.data;
       }
     }
   }, resErrorHandler);

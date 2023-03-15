@@ -25,34 +25,34 @@
       </div>
     </div>
 
-    <div v-if="navMenuKey === '1'" class="layouts-view-wrap">
-      <div class="layouts-left-menus">
-        <leftMenuList :leftMenus="leftMenus" />
+    <div class="layouts-view-wrap">
+      <div v-if="navMenuKey === '1'" class="layouts-left-menus">
+        <leftMenuList :left-menus="leftMenus" />
       </div>
 
       <div class="layouts-content">
-        <router-view></router-view>
+        <router-view v-slot="{ Component, route }">
+          <keep-alive>
+            <component :is="Component" :key="route.path" />
+          </keep-alive>
+        </router-view>
       </div>
-    </div>
-
-    <div v-else>
-      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import navMenuList from "./components/navMenus/index.vue";
-import leftMenuList from "./components/leftMenus/index.vue";
-import { IconDown } from "@arco-design/web-vue/es/icon";
-import { useUserStore } from "../../store/user";
-import { useRouter } from "vue-router";
-import type { Imeus } from "../../store/user";
-import { ref, watch, toRaw, Ref, computed } from "vue";
+import navMenuList from './components/navMenus/index.vue';
+import leftMenuList from './components/leftMenus/index.vue';
+import { IconDown } from '@arco-design/web-vue/es/icon';
+import { useUserStore } from '../../store/user';
+import { useRouter } from 'vue-router';
+import type { Imeus } from '../../store/user';
+import { ref, watch, toRaw, Ref, computed } from 'vue';
 
 const userStore = useUserStore();
 const router = useRouter();
-const navMenuKey = ref("");
+const navMenuKey = ref('');
 const leftMenus: Ref<Imeus[]> = ref([]);
 const userName = computed(() => userStore.name);
 
@@ -67,20 +67,21 @@ const getLeftMenus = (key: string) => {
 
 // 打开个人中心
 const handleOpenUser = () => {
-  console.log("打开个人中心");
+  console.log('打开个人中心');
 };
 
 // 退出登录
 const handleLogout = () => {
   userStore._GetLogout();
-  router.push("/login");
+  router.push('/login');
 };
 
 // 监听navMenu中的路由变化
 watch(
   () => userStore.menusItem,
   (newValue) => {
-    if (newValue.key === "1") {
+    if (newValue.key === '1') {
+      console.log(newValue.key);
       getLeftMenus(newValue.key);
     }
     navMenuKey.value = newValue.key;

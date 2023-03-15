@@ -1,10 +1,10 @@
 <template>
   <div class="menu-nav">
-    <a-menu mode="horizontal" v-model:selected-keys="activeKeys">
+    <a-menu v-model:selected-keys="activeKeys" mode="horizontal">
       <a-menu-item
-        class="menu-item"
         v-for="item in menus"
         :key="item.key"
+        class="menu-item"
         @click="handleMenus(item)"
       >
         <component :is="item.icon" />
@@ -15,16 +15,16 @@
 </template>
 
 <script setup lang="ts">
-import { IconApps, IconRobot } from "@arco-design/web-vue/es/icon";
-import { useUserStore } from "../../../../store/user";
-import type { Imeus } from "../../../../store/user";
-import { useRoute, useRouter } from "vue-router";
-import { ref, Ref, computed, toRaw, watch } from "vue";
+import { IconApps, IconRobot } from '@arco-design/web-vue/es/icon';
+import { useUserStore } from '../../../../store/user';
+import type { Imeus } from '../../../../store/user';
+import { useRoute, useRouter } from 'vue-router';
+import { ref, computed, toRaw, watch } from 'vue';
 
 const userStore = useUserStore();
 const route = useRoute();
 const router = useRouter();
-const activeKeys: Ref<string[]> = ref([]);
+const activeKeys = ref<string[]>([]);
 
 // 获取路由
 const menus = computed(() => {
@@ -43,18 +43,15 @@ const menus = computed(() => {
 
 // 跳转路由
 const handleMenus = (item: Imeus): void => {
-  if (item.redirect) {
-    router.push(item.redirect);
-  }
+  item.redirect && router.push(item.redirect);
 };
 
 // 监听路由变化
 watch(
   () => route.path,
   (newValue) => {
-    const menusList = toRaw(userStore.menus);
-    const menuItem = menusList.find(item => item.redirect === newValue);
-    if(menuItem) {
+    const menuItem = userStore.menus.find((item) => item.redirect === newValue);
+    if (menuItem) {
       activeKeys.value = [menuItem.key];
       userStore.menusItem = menuItem;
     }

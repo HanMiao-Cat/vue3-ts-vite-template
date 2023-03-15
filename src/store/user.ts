@@ -1,22 +1,22 @@
-import {defineStore} from "pinia";
-import md5 from "js-md5";
-import storage from "store";
-import {Message} from "@arco-design/web-vue";
-import {usePermissionRouter} from "./permissionRouter";
-import router from "../router";
-import {toRaw} from "vue";
+import { defineStore } from 'pinia';
+import md5 from 'js-md5';
+import storage from 'store';
+import { Message } from '@arco-design/web-vue';
+import { usePermissionRouter } from './permissionRouter';
+import router from '../router';
+import { toRaw } from 'vue';
 
 export type Imeus = {
   component: string;
   name: string;
   path: string;
-  key: string,
-  icon?: any,
-  redirect?: string,
+  key: string;
+  icon?: any;
+  redirect?: string;
   children?: Imeus[];
 };
 
-export const useUserStore = defineStore("userStore", {
+export const useUserStore = defineStore('userStore', {
   state: () => ({
     name: '',
     menus: [] as Imeus[],
@@ -27,20 +27,20 @@ export const useUserStore = defineStore("userStore", {
     // 登录
     async _GetLogin(params: Params.Login) {
       return new Promise((reslove, reject) => {
-        if (params.name === "admin" && params.passWord === "123456") {
-          let token = "1231323132";
+        if (params.name === 'admin' && params.passWord === '123456') {
+          let token = '1231323132';
           token = md5(token);
-          storage.set("token", token);
+          storage.set('token', token);
           this.name = params.name;
           reslove('yes');
         } else {
           Message.error(`账号或密码错误`);
           reject();
         }
-      })
+      });
     },
 
-    // 获取用户信息接口
+    // 获取用户信息
     _getUserInfo() {
       this.name = 'admin';
     },
@@ -50,39 +50,42 @@ export const useUserStore = defineStore("userStore", {
       return new Promise((reslove) => {
         const menus: Array<Imeus> = [
           {
-            path: "/system",
-            name: "Systems",
-            component: "Layouts",
-            redirect: "/home",
-            icon: "IconApps",
-            key: "1",
+            path: '/system',
+            name: 'Systems',
+            component: 'Layouts',
+            redirect: '/home',
+            icon: 'IconApps',
+            key: '1',
             children: [
               {
-                path: "/home",
-                name: "Home",
+                path: '/home',
+                name: 'Home',
                 key: '1-1',
-                component: "home/Home.vue"
-              },{
-                path: "/router",
-                name: "Router",
+                component: 'home/Home.vue',
+              },
+              {
+                path: '/router',
+                name: 'Router',
                 key: '1-2',
-                component: "router/Router.vue"
-              }
-            ]
+                component: 'router/Router.vue',
+              },
+            ],
           },
           {
-            path: "/order",
-            name: "Order",
-            component: "Layouts",
-            icon: "IconRobot",
-            redirect: "/goods",
+            path: '/order',
+            name: 'Order',
+            component: 'Layouts',
+            icon: 'IconRobot',
+            redirect: '/goods',
             key: '2',
-            children: [{
-              path: "/goods",
-              name: "Goods",
-              key: '2-1',
-              component: "goods/Goods.vue",
-            }],
+            children: [
+              {
+                path: '/goods',
+                name: 'Goods',
+                key: '2-1',
+                component: 'goods/Goods.vue',
+              },
+            ],
           },
         ];
         this.menus = menus;
@@ -90,14 +93,14 @@ export const useUserStore = defineStore("userStore", {
         const results = permissionRouter._GenerateRoutes<Imeus>(menus);
         results.forEach((item: any) => {
           const _item = toRaw(item);
-          router.addRoute("Layouts", _item);
+          router.addRoute('Layouts', _item);
         });
 
         // 添加错误路由
         router.addRoute({
-          path: "/:pathMatch(.*)*",
-          name: "NotFound",
-          component: () => import("../view/notFound/NotFound.vue"),
+          path: '/:pathMatch(.*)*',
+          name: 'NotFound',
+          component: () => import('../view/notFound/NotFound.vue'),
         });
 
         this.loadRouter = true;
@@ -109,6 +112,6 @@ export const useUserStore = defineStore("userStore", {
     _GetLogout() {
       storage.remove('token');
       this.name = '';
-    }
+    },
   },
 });

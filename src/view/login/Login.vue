@@ -5,12 +5,12 @@
         <h1 class="login-wrap-title-greet">欢迎登录</h1>
       </div>
       <a-form
-        :model="form"
         ref="formRef"
-        @submit-success="handleSubmit"
+        :model="form"
         label-align="left"
         auto-label-width
         :rules="rules"
+        @submit-success="handleSubmit"
       >
         <a-form-item field="name" label="用户名">
           <a-input v-model="form.name" size="large">
@@ -20,7 +20,7 @@
           </a-input>
         </a-form-item>
         <a-form-item field="passWord" label="密码">
-          <a-input-password autocomplete v-model="form.passWord" size="large">
+          <a-input-password v-model="form.passWord" autocomplete size="large">
             <template #prefix>
               <icon-lock />
             </template>
@@ -39,28 +39,24 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from "vue";
-import { IconUser, IconLock } from "@arco-design/web-vue/es/icon";
+import { reactive, computed } from 'vue';
+import { IconUser, IconLock } from '@arco-design/web-vue/es/icon';
 import { Notification } from '@arco-design/web-vue';
-import { useUserStore } from "../../store/user";
-import { useRouter } from "vue-router";
+import { useUserStore } from '../../store/user';
+import { useRouter } from 'vue-router';
 
 const userStore = useUserStore();
 const router = useRouter();
 
 const form = reactive<Params.Login>({
-  name: "admin",
-  passWord: "123456",
+  name: 'admin',
+  passWord: '123456',
 });
 
 const rules = {
-  name: [
-    { required: true, message: '请输入用户名', trigger: 'blur' }
-  ],
-  passWord: [
-    { required: true, message: '请输入密码', trigger: 'blur' }
-  ]
-}
+  name: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  passWord: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+};
 
 const buttonDisable = computed(() => {
   let flag = false;
@@ -75,10 +71,13 @@ const buttonDisable = computed(() => {
 
 const handleSubmit = async () => {
   await userStore._GetLogin(form);
-  Notification.success({title:`登录成功`, content: `欢迎回来！${form.name}`});
+  Notification.success({
+    title: `登录成功`,
+    content: `欢迎回来！${form.name}`,
+  });
   setTimeout(() => {
     router.push('/home');
-  }, 800)
+  }, 800);
 };
 </script>
 

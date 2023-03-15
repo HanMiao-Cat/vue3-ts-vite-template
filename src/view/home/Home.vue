@@ -5,11 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
 const myCanvas = ref<HTMLCanvasElement>();
 const init = () => {
   if (myCanvas.value) {
-    const nxt = myCanvas.value.getContext("2d") as CanvasRenderingContext2D;
+    const nxt = myCanvas.value.getContext('2d') as CanvasRenderingContext2D;
     // nxt.moveTo(50, 50);
     // nxt.lineTo(250, 50);
     // nxt.lineWidth = 20;
@@ -25,7 +25,6 @@ const init = () => {
     // nxt.strokeStyle = "red";
     // nxt.lineCap = "butt";
     // nxt?.stroke();
-
 
     // 折线
     // nxt.moveTo(20, 120);
