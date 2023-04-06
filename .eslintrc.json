@@ -5,12 +5,12 @@
     "es2021": true,
     "vue/setup-compiler-macros": true
   },
+  "parser": "vue-eslint-parser",
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:vue/vue3-recommended",
     "prettier"
   ],
-  "parser": "vue-eslint-parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",

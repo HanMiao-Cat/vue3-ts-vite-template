@@ -81,7 +81,6 @@ watch(
   () => userStore.menusItem,
   (newValue) => {
     if (newValue.key === '1') {
-      console.log(newValue.key);
       getLeftMenus(newValue.key);
     }
     navMenuKey.value = newValue.key;
@@ -130,6 +129,7 @@ watch(
   .layouts-view-wrap {
     display: flex;
     .layouts-content {
+      padding: 20px;
       flex: 1;
     }
   }

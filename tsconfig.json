@@ -1,19 +1,13 @@
 {
   "compilerOptions": {
-    // 打包后生成的js版本，ESNext为ECMAScript下个版本，及最新版本
     "target": "ESNext",
-    // 是否可以编译js
-    // "allowJs": true,
-    // 打包后文件位置
-    // "outDir": "/dist",
+    "allowJs": true,
+    "outDir": "/dist",
     "useDefineForClassFields": true,
-    // 模块导出 & 导出使用什么规范
     "module": "ESNext",
     "moduleResolution": "Node",
-    // 严格模式
     "strict": true,
     "jsx": "preserve",
-    // 打包一个源文件
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

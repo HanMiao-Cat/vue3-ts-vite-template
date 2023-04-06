@@ -4,7 +4,6 @@ import storage from 'store';
 import { Message } from '@arco-design/web-vue';
 import { usePermissionRouter } from './permissionRouter';
 import router from '../router';
-import { toRaw } from 'vue';
 
 export type Imeus = {
   component: string;
@@ -92,8 +91,7 @@ export const useUserStore = defineStore('userStore', {
         const permissionRouter = usePermissionRouter();
         const results = permissionRouter._GenerateRoutes<Imeus>(menus);
         results.forEach((item: any) => {
-          const _item = toRaw(item);
-          router.addRoute('Layouts', _item);
+          router.addRoute('Layouts', item);
         });
 
         // 添加错误路由

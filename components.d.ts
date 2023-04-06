@@ -17,6 +17,8 @@ declare module '@vue/runtime-core' {
     AMenuItem: typeof import('@arco-design/web-vue')['MenuItem']
     APopover: typeof import('@arco-design/web-vue')['Popover']
     ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
+    ATable: typeof import('@arco-design/web-vue')['Table']
+    ATableColumn: typeof import('@arco-design/web-vue')['TableColumn']
     Layouts: typeof import('./src/components/layouts/Layouts.vue')['default']
     LeftMenus: typeof import('./src/components/layouts/components/leftMenus/index.vue')['default']
     NavMenus: typeof import('./src/components/layouts/components/navMenus/index.vue')['default']
