@@ -48,7 +48,7 @@ import { useRouter } from 'vue-router';
 const userStore = useUserStore();
 const router = useRouter();
 
-const form = reactive<params.login>({
+const form = reactive<Params.login>({
   name: 'admin',
   passWord: '123456',
 });
