@@ -157,12 +157,13 @@ onUnmounted(() => {
 <style scoped lang="less">
 .table-wrap {
   .table__icon {
-    cursor: pointer;
     color: #2d5cf6;
+    cursor: pointer;
   }
+
   .table__icon--disabled {
+    color: #cccccc;
     cursor: not-allowed;
-    color: #ccc;
   }
 }
 </style>

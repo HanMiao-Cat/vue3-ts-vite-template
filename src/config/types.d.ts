@@ -1,12 +1,12 @@
 declare namespace Params {
-  interface Login {
+  interface login {
     name: string;
     passWord: string;
   }
 }
 
-declare namespace Api {
-  interface ResponseOk {
+declare namespace api {
+  interface responseok {
     msg: string;
     code: number;
   }

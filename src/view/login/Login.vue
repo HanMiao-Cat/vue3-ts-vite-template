@@ -48,7 +48,7 @@ import { useRouter } from 'vue-router';
 const userStore = useUserStore();
 const router = useRouter();
 
-const form = reactive<Params.Login>({
+const form = reactive<Params.login>({
   name: 'admin',
   passWord: '123456',
 });
@@ -60,7 +60,7 @@ const rules = {
 
 const buttonDisable = computed(() => {
   let flag = false;
-  let key: keyof Params.Login;
+  let key: keyof params.Login;
   for (key in form) {
     if (!form[key]) {
       flag = true;
@@ -83,26 +83,29 @@ const handleSubmit = async () => {
 
 <style scoped lang="less">
 .login-wrap {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  position: relative;
+
   .login-wrap-form {
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    box-sizing: border-box;
     width: 400px;
     height: 400px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    right: 20%;
-    top: 50%;
-    transform: translateY(-50%);
-    position: absolute;
     padding: 36px;
-    box-sizing: border-box;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    transform: translateY(-50%);
+
     .login-wrap-title {
       display: flex;
-      margin-bottom: 50px;
       align-items: center;
       justify-content: center;
+      margin-bottom: 50px;
       color: rgb(var(--arcoblue-6));
     }
+
     .login-wrap-submit {
       width: 100%;
       height: 36px;

@@ -96,13 +96,13 @@ watch(
   width: 100vw;
 
   .layouts-wrap-nav-bar {
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
-    background-color: rgb(var(--primary-6));
-    padding: 0 20px;
     box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    background-color: rgb(var(--primary-6));
 
     .layouts-wrap-nav-logo {
       width: 200px;
@@ -113,6 +113,7 @@ watch(
 
     .layouts-wrap-nav-user {
       cursor: pointer;
+
       .layouts-wrap-nav-user-name {
         color: var(--color-bg-1);
       }
@@ -121,19 +122,21 @@ watch(
     .layouts-wrap-nav-menus {
       position: relative;
       width: 500px;
-      margin: 0 auto;
       height: 52px;
+      margin: 0 auto;
     }
   }
 
   .layouts-view-wrap {
     display: flex;
+
     .layouts-content {
-      padding: 20px;
       flex: 1;
+      padding: 20px;
     }
   }
 }
+
 .layouts-wrap-popover-item:hover {
   cursor: pointer;
 }

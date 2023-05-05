@@ -64,10 +64,10 @@ watch(
 
 <style scoped lang="less">
 .menu-nav {
-  top: 0;
-  left: 0;
-  right: 0;
   position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   width: 500px;
   height: 100%;
   margin: 0 auto;
@@ -80,14 +80,14 @@ watch(
       padding-bottom: 11px;
 
       .arco-menu-item {
-        background-color: transparent;
         color: var(--color-white);
+        background-color: transparent;
         transition: all 0.3s;
 
         .arco-icon {
           margin-right: 8px;
-          font-size: 18px;
           color: var(--color-white);
+          font-size: 18px;
           vertical-align: -4px;
         }
 

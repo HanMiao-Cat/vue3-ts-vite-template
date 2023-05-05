@@ -24,6 +24,8 @@ const permission = (router: Router) => {
     } else {
       if (to.path === '/login') {
         next();
+      } else {
+        next({ path: '/login' });
       }
       NProgress.done();
     }

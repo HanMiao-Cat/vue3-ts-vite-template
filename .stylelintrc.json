@@ -1,0 +1,48 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-rational-order",
+    "stylelint-prettier/recommended",
+    "stylelint-config-recommended-vue"
+  ],
+  "plugins": ["stylelint-order"],
+  "overrides": [
+    {
+      "files": ["**/*.html"],
+      "customSyntax": "postcss-html"
+    },
+    {
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss"
+    },
+    {
+      "files": ["**/*.less"],
+      "customSyntax": "postcss-less"
+    }
+  ],
+  "rules": {
+    "color-hex-case": "lower",
+    "block-no-empty": true,
+    "color-hex-length": "long",
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignoreTypes": []
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["v-deep"]
+      }
+    ],
+    "no-descending-specificity": null,
+    "at-rule-no-unknown": null,
+    "comment-no-empty": true,
+    "shorthand-property-no-redundant-values": true,
+    "value-no-vendor-prefix": true,
+    "property-no-vendor-prefix": true,
+    "number-leading-zero": "always",
+    "no-empty-first-line": true
+  }
+}

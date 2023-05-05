@@ -58,37 +58,44 @@ const handleCutMenu = (menu: Imeus) => {
 .left-menus-wrap {
   width: 240px;
   height: calc(100vh - 52px);
+  overflow: hidden;
   border-right: var(--color-neutral-2) 2px solid;
   transition: width 0.36s ease;
-  overflow: hidden;
+
   .menus-top-wrap {
-    padding: 8px;
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
     width: 100%;
     height: 52px;
-    display: flex;
-    align-items: center;
-    border-bottom: var(--color-neutral-3) 1px solid;
+    padding: 8px;
     background-color: #fafbfc;
+    border-bottom: var(--color-neutral-3) 1px solid;
+
     .menus-top_text {
+      padding-left: 12px;
       color: var(--color-neutral-10);
       font-weight: 600;
-      padding-left: 12px;
     }
   }
+
   :deep(.arco-menu) {
-    border-radius: 0px !important;
-    background-color: #fafbfc;
     height: calc(100vh - 52px - 52px);
+    background-color: #fafbfc;
+    border-radius: 0 !important;
+
     .arco-menu-inner {
       padding: 8px;
+
       .arco-menu-item {
-        border-radius: 4px;
         background-color: #fafbfc;
+        border-radius: 4px;
       }
+
       .arco-menu-selected {
         background-color: #ebecf0;
       }
+
       .arco-menu-item:hover {
         background-color: #ebecf0;
       }
