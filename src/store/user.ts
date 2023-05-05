@@ -24,7 +24,7 @@ export const useUserStore = defineStore('userStore', {
   }),
   actions: {
     // 登录
-    async _GetLogin(params: Params.Login) {
+    async _GetLogin(params: Params.login) {
       return new Promise((reslove, reject) => {
         if (params.name === 'admin' && params.passWord === '123456') {
           let token = '1231323132';

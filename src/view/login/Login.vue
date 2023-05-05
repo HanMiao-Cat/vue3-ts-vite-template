@@ -48,7 +48,7 @@ import { useRouter } from 'vue-router';
 const userStore = useUserStore();
 const router = useRouter();
 
-const form = reactive<Params.login>({
+const form = reactive<params.login>({
   name: 'admin',
   passWord: '123456',
 });
@@ -60,7 +60,7 @@ const rules = {
 
 const buttonDisable = computed(() => {
   let flag = false;
-  let key: keyof params.Login;
+  let key: keyof Params.login;
   for (key in form) {
     if (!form[key]) {
       flag = true;
